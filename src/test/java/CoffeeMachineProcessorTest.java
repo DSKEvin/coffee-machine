@@ -2,6 +2,8 @@ import drink.DrinkType;
 import maker.CoffeeMachineProcessor;
 import maker.DrinkMaker;
 import order.Order;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -23,7 +25,7 @@ public class CoffeeMachineProcessorTest {
         String drinkMakerOrder = "C::";
         this.command(DrinkType.COFFEE, 0);
 
-        Mockito.verify(drinkMaker, Mockito.only()).makeDrink(drinkMakerOrder);
+        Mockito.verify(drinkMaker, Mockito.only()).send(drinkMakerOrder);
     }
 
     @Test
@@ -31,7 +33,7 @@ public class CoffeeMachineProcessorTest {
         String drinkMakerOrder = "C:1:0";
         this.command(DrinkType.COFFEE, 1);
 
-        Mockito.verify(drinkMaker, Mockito.only()).makeDrink(drinkMakerOrder);
+        Mockito.verify(drinkMaker, Mockito.only()).send(drinkMakerOrder);
     }
 
     @Test
@@ -39,7 +41,7 @@ public class CoffeeMachineProcessorTest {
         String drinkMakerOrder = "T:2:0";
         this.command(DrinkType.TEA, 2);
 
-        Mockito.verify(drinkMaker, Mockito.only()).makeDrink(drinkMakerOrder);
+        Mockito.verify(drinkMaker, Mockito.only()).send(drinkMakerOrder);
     }
 
     @Test
@@ -47,9 +49,8 @@ public class CoffeeMachineProcessorTest {
         String drinkMakerOrder = "H::";
         this.command(DrinkType.CHOCOLATE, 0);
 
-        Mockito.verify(drinkMaker, Mockito.only()).makeDrink(drinkMakerOrder);
+        Mockito.verify(drinkMaker, Mockito.only()).send(drinkMakerOrder);
     }
-
 
     private void command(DrinkType drinkType, int sugarNumber) {
         coffeeMachineProcessor.processDrinkOrder(new Order(drinkType, sugarNumber));

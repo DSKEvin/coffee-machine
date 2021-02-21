@@ -2,5 +2,5 @@ package maker;
 
 public interface DrinkMaker {
 
-    void makeDrink(String order);
+    void send(String message);
 }

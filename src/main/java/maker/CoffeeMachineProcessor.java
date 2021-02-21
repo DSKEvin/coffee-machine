@@ -1,12 +1,15 @@
 package maker;
 
+import order.Order;
+
 import java.util.Objects;
 
-public class CoffeeMachineProcessor {
+public class CoffeeMachineProcessor implements Display {
 
     public DrinkMaker drinkMaker;
 
     public static final String SEPARATOR = ":";
+    public static final String MESSAGE_PREFIX = "M:";
 
     public void processDrinkOrder(Order order) {
         StringBuilder makerInstruction = new StringBuilder();
@@ -18,10 +21,17 @@ public class CoffeeMachineProcessor {
                     .append(addStickDependingOnSugarNumber(order.getSugarNumber()));
         }
 
-         drinkMaker.makeDrink(makerInstruction.toString());
+         drinkMaker.send(makerInstruction.toString());
     }
+
+
 
     private String addStickDependingOnSugarNumber(Integer sugarNumber) {
         return sugarNumber > 0 ? "0" : "";
+    }
+
+    @Override
+    public void display(String message) {
+        drinkMaker.send(MESSAGE_PREFIX + message);
     }
 }
