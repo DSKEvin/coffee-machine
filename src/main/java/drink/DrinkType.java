@@ -1,3 +1,5 @@
+package drink;
+
 public enum DrinkType {
     COFFEE("C"), TEA("T"), CHOCOLATE("H");
 

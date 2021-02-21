@@ -1,3 +1,7 @@
+package order;
+
+import drink.DrinkType;
+
 public class Order {
 
     private DrinkType drinkType;

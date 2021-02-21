@@ -1,3 +1,5 @@
+package maker;
+
 import java.util.Objects;
 
 public class CoffeeMachineProcessor {

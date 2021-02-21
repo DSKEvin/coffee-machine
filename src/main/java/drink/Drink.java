@@ -1,3 +1,5 @@
+package drink;
+
 public class Drink {
 
     private Integer sugarNumber;
