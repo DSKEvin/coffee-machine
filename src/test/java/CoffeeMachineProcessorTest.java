@@ -2,8 +2,6 @@ import drink.DrinkType;
 import maker.CoffeeMachineProcessor;
 import maker.DrinkMaker;
 import order.Order;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -52,8 +50,43 @@ public class CoffeeMachineProcessorTest {
         Mockito.verify(drinkMaker, Mockito.only()).send(drinkMakerOrder);
     }
 
-    private void command(DrinkType drinkType, int sugarNumber) {
-        coffeeMachineProcessor.processDrinkOrder(new Order(drinkType, sugarNumber));
+    @Test
+    public void shouldCommandOrangeJuiceWithoutStickWhenNoSugar() {
+        String drinkMakerOrder = "O::";
+        this.command(DrinkType.ORANGE_JUICE, 0);
+
+        Mockito.verify(drinkMaker, Mockito.only()).send(drinkMakerOrder);
     }
 
+    @Test
+    public void shouldCommandOrangeJuiceWithStickWhenOneSugar() {
+        String drinkMakerOrder = "O:1:0";
+        this.command(DrinkType.ORANGE_JUICE, 1);
+
+        Mockito.verify(drinkMaker, Mockito.only()).send(drinkMakerOrder);
+    }
+
+    @Test
+    public void shouldCommandHotCoffeeWithStickWhenOneSugar() {
+        String drinkMakerOrder = "Ch:1:0";
+        this.commandHot(DrinkType.COFFEE, 1);
+
+        Mockito.verify(drinkMaker, Mockito.only()).send(drinkMakerOrder);
+    }
+
+    @Test
+    public void shouldNotCommandHotOrangeJuiceWithoutStickWhenNoSugar() {
+        String drinkMakerOrder = "O::";
+        this.commandHot(DrinkType.ORANGE_JUICE, 0);
+
+        Mockito.verify(drinkMaker, Mockito.only()).send(drinkMakerOrder);
+    }
+
+    private void command(DrinkType drinkType, int sugarNumber) {
+        coffeeMachineProcessor.processDrinkOrder(new Order(drinkType, sugarNumber, false));
+    }
+
+    private void commandHot(DrinkType drinkType, int sugarNumber) {
+        coffeeMachineProcessor.processDrinkOrder(new Order(drinkType, sugarNumber, true));
+    }
 }

@@ -15,6 +15,7 @@ public class CoffeeMachineProcessor implements Display {
         StringBuilder makerInstruction = new StringBuilder();
         if (Objects.nonNull(order)) {
             makerInstruction.append(order.getDrinkType().getCode())
+                    .append(order.isHotDrink() && order.getDrinkType().canOrderHot() ? "h" : "")
                     .append(SEPARATOR)
                     .append(order.getSugarNumber() > 0 ? order.getSugarNumber() : "")
                     .append(SEPARATOR)

@@ -22,7 +22,7 @@ public class CoffeeMakerServiceTest extends TestCase {
     @Test
     public void shouldCommandWhenEnoughMoneyInserted() {
         coffeeMakerService.receiveMoney(80);
-        Order order = new Order(DrinkType.COFFEE, 1);
+        Order order = new Order(DrinkType.COFFEE, 1, false);
 
         coffeeMakerService.command(order);
 
@@ -32,7 +32,7 @@ public class CoffeeMakerServiceTest extends TestCase {
     @Test
     public void shouldNotCommandWhenNotEnoughMoneyInserted() {
         coffeeMakerService.receiveMoney(10);
-        Order order = new Order(DrinkType.COFFEE, 1);
+        Order order = new Order(DrinkType.COFFEE, 1, false);
         String message = "Missing money : 50";
 
         coffeeMakerService.command(order);

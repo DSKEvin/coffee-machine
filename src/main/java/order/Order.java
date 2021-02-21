@@ -4,13 +4,16 @@ import drink.DrinkType;
 
 public class Order {
 
-    private DrinkType drinkType;
+    private final DrinkType drinkType;
 
     private int sugarNumber = 0;
 
-    public Order(DrinkType drinkType, int sugarNumber) {
+    private boolean hotDrink;
+
+    public Order(DrinkType drinkType, int sugarNumber, boolean hotDrink) {
         this.drinkType = drinkType;
         this.sugarNumber = sugarNumber;
+        this.hotDrink = hotDrink;
     }
 
     public DrinkType getDrinkType() {
@@ -19,5 +22,9 @@ public class Order {
 
     public int getSugarNumber() {
         return sugarNumber;
+    }
+
+    public boolean isHotDrink() {
+        return hotDrink;
     }
 }
